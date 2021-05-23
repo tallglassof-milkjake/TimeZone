@@ -74,18 +74,18 @@ $(function() {
             
             let date = new Date();
 
-            let foreignHour = date.getHours();
-            let foreignMinute = date.getMinutes();
+            // let foreignHour = date.getHours();
+            // let foreignMinute = date.getMinutes();
 
-            foreignMinute = (foreignMinute < 10 ? "0" : "") + foreignMinute;
+            // foreignMinute = (foreignMinute < 10 ? "0" : "") + foreignMinute;
             
-            let foreignMeridiam = (foreignHour < 12) ? "am" : "pm";
+            // let foreignMeridiam = (foreignHour < 12) ? "am" : "pm";
 
-            foreignHour = (foreignHour > 12) ? foreignHour - 12 : foreignHour;
+            // foreignHour = (foreignHour > 12) ? foreignHour - 12 : foreignHour;
 
-            foreignHour = (foreignHour == 0) ? 12 : foreignHour;
+            // foreignHour = (foreignHour == 0) ? 12 : foreignHour;
 
-            let foreignTime = `${foreignHour}:${foreignMinute} ${foreignMeridiam}`;
+            // let foreignTime = `${foreignHour}:${foreignMinute} ${foreignMeridiam}`;
 
 
             let thisCity = $("#city").val();
@@ -93,7 +93,7 @@ $(function() {
             console.log(thisCountry);
             console.log(thisCity);
 
-            let dateAbroad = date.toLocaleString('en-US', 'short', {timeZone: `${thisCountry}/${thisCity}` });
+            let dateAbroad = date.toLocaleString('en-US', {timeZone: `${thisCountry}/${thisCity}` });
             console.log(dateAbroad)
 
             $("#selectedTimezone").html(dateAbroad);
