@@ -48,27 +48,46 @@ $(function() {
 
     timeZones();
 
-    // function getCities() {
+    function getCities() {
 
-    //     // let queryURL = "https://wft-geo-db.p.rapidapi.com/v1/locale/timezones/Australia__Sydney/time";
+        // let country = "Africa";
+        // let timeZone = "Cairo";
 
-    //     const settings = {
-    //         "async": true,
-    //         "crossDomain": true,
-    //         "url": "https://wft-geo-db.p.rapidapi.com/v1/locale/timezones/Australia__Sydney/time",
-    //         "method": "GET",
-    //         "headers": {
-    //             "x-rapidapi-key": "9412a276cbmsh4a03f98b46a37d7p1d53c7jsnbbec000e7aac",
-    //             "x-rapidapi-host": "wft-geo-db.p.rapidapi.com"
-    //         }
-    //     };
+        // const settings = {
+        //     "async": true,
+        //     "crossDomain": true,
+        //     "url": "https://wft-geo-db.p.rapidapi.com/v1/locale/timezones/" + country + "__" + timeZone + "/time",
+        //     "method": "GET",
+        //     "headers": {
+        //         "x-rapidapi-key": "9412a276cbmsh4a03f98b46a37d7p1d53c7jsnbbec000e7aac",
+        //         "x-rapidapi-host": "wft-geo-db.p.rapidapi.com"
+        //     }
+        // };
         
-    //     $.ajax(settings).done(function (response) {
-    //         console.log(response);
-    //     });
-    // };
+        // $.ajax(settings).done(function (response) {
+        //     console.log(response);
+        // });
 
-    // getCities();
+        let date = new Date();
+        
+        let city = $("#checkBtn").click(function() {
+            
+            let thisCity = $("#city").val();
+            let thisCountry = $("#country").val();
+            console.log(thisCountry);
+            console.log(thisCity);
+
+            let dateAbroad = date.toLocaleString('en-US', {timeZone: `${thisCountry}/${thisCity}` });
+            console.log(dateAbroad)
+
+            $("#selectedTimezone").html(dateAbroad);
+        });
+        
+        setInterval(city, 1000);
+        
+    };
+
+    getCities();
     
 
     // let day = currentTime.getDate();
