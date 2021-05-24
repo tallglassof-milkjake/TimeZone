@@ -18,57 +18,49 @@ $(function() {
 
         let currentTimeString = `${currentHour}:${currentMinute} ${currentMeridiam}`;
 
-        if ($("#localTime").prop("checked", true)) {
-            $("#currentTime").html(currentTimeString);
-        }
+        let todaysDate = currentTime.getDate();
+        let todaysMonthString = currentTime.toLocaleString('default', {month: 'long'})
+        let thisYear = currentTime.getFullYear();
 
-        // if ($("#localTime").prop("checked", false)) {
-        //     $("#localTime").attr("checked", false);
-        //     $("#currentTime").hide();
-        // } else {
-        //     $("#localTime").attr("checked", true);
-        //     $("#currentTime").html(currentTimeString);
-        // }
+        // $("#currentTime").html(currentTimeString);
+
+        // let myLocation = navigator.geolocation.getCurrentPosition(showPosition);
+
+        // console.log(myLocation);
+
+        // $("#currentTime").html()
+
+        $("#showTime").val(currentTimeString);
+
+        $("#showDate").val(todaysDate);
+
+        $("#showMonth").val(todaysMonthString);
+
+        $("#showYear").val(thisYear);
+
+
     };
 
     createTime();
 
     setInterval(createTime, 1000);
 
-    // function timeZones() {
-    //     if ($("#otherTime").is(":checked")) {
-    //         $("#currentTime").html(currentTimeString).hide();
-            
-    //         let formDiv = '<div class="form-group mx-auto w-50">';
-    //         let formInput = '<input type="text" class="form-control" id="exampleFormControlInput1"></input>';
-    //         $("#timeZoneCheck").after(formDiv);
-    //         formDiv.append(formInput);
-    //     }
-    // }
+    function getMyLocation() {
+        if ("geolocation" in navigator) { //check geolocation available 
+            //try to get user current location using getCurrentPosition() method
+            navigator.geolocation.getCurrentPosition(function(position){ 
+                    console.log("Found your location \nLat : "+position.coords.latitude+" \nLang :"+ position.coords.longitude);
+                    $("#currentTime").html("Your location is" + position.coords.latitude + position.coords.longitude +"Have a nice day")
+            });
+        }else{
+            console.log("Browser doesn't support geolocation!");
+        }
+    }
 
-    // timeZones();
+    getMyLocation();
+
 
     function getCities() {
-
-        // let country = "Africa";
-        // let timeZone = "Cairo";
-
-        // const settings = {
-        //     "async": true,
-        //     "crossDomain": true,
-        //     "url": "https://wft-geo-db.p.rapidapi.com/v1/locale/timezones/" + country + "__" + timeZone + "/time",
-        //     "method": "GET",
-        //     "headers": {
-        //         "x-rapidapi-key": "9412a276cbmsh4a03f98b46a37d7p1d53c7jsnbbec000e7aac",
-        //         "x-rapidapi-host": "wft-geo-db.p.rapidapi.com"
-        //     }
-        // };
-        
-        // $.ajax(settings).done(function (response) {
-        //     console.log(response);
-        // });
-
-        // let date = new Date();
         
         $("#checkBtn").click(function() {
             
@@ -87,9 +79,11 @@ $(function() {
 
             // let foreignTime = `${foreignHour}:${foreignMinute} ${foreignMeridiam}`;
 
+            let thisCity = "London";
+            let thisCountry = "Europe";
 
-            let thisCity = $("#city").val();
-            let thisCountry = $("#country").val();
+            // let thisCity = $("#city").val();
+            // let thisCountry = $("#country").val();
             console.log(thisCountry);
             console.log(thisCity);
 
@@ -97,6 +91,7 @@ $(function() {
             console.log(dateAbroad)
 
             $("#selectedTimezone").html(dateAbroad);
+            
         });
         
         
@@ -104,13 +99,6 @@ $(function() {
     };
 
     getCities();
-    
-
-    // let day = currentTime.getDate();
-    // let month = currentTime.getMonth() + 1;
-    // let year = currentTime.getFullYear();
-
-    // console.log(`${day}/${month}/${year} at ${time}`)
 
     
 })
